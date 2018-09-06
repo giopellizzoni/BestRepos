@@ -15,7 +15,6 @@ import Gloss
 class SwiftRepositoryTableViewController: UITableViewController {
     
     var repositories = [Repository]()
-    var numberOfRowsLimit = 0
     var totalRepositories = 0
     var page = 1
     
@@ -29,6 +28,8 @@ class SwiftRepositoryTableViewController: UITableViewController {
         loadRepos(page)
     }
     
+    
+    // MARK: TableView Methods
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150.0
     }
@@ -36,7 +37,6 @@ class SwiftRepositoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repositories.count
     }
-    
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
@@ -62,7 +62,20 @@ class SwiftRepositoryTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "showPRlist", sender: nil)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            guard let destinationVC = segue.destination as? PullRequestsTableViewController else {return}
+            destinationVC.repo = repositories[indexPath.row].name
+            destinationVC.owner = repositories[indexPath.row].owner?.login
+            
+        }
+    }
+    
+    // MARK: Auxiliary Methods
     func loadRepos(_ onPage: Int){
         let url = "https://api.github.com/search/repositories?q=language:Swift&sort=stars&page=\(onPage)"
         

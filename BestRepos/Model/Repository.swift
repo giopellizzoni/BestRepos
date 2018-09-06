@@ -32,6 +32,9 @@ struct Repository: JSONDecodable {
 struct Owner: JSONDecodable {
     init?(json: JSON) {
         self.avatarURL = "avatar_url" <~~ json
+        self.login = "login" <~~ json
     }
     var avatarURL: String?
+    var login: String?
 }
+
