@@ -26,7 +26,7 @@ class SwiftRepositoryTableViewController: UITableViewController {
         let nib = UINib(nibName: "RepositoryCellTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "customCell")
         tableView.separatorStyle = .none
-        loadRepos()
+        loadRepos(page)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -40,12 +40,16 @@ class SwiftRepositoryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
+        if indexPath.row == repositories.count - 1 {
+            if repositories.count < totalRepositories {
+                page += 1
+                loadRepos(page)                
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! RepositoryCellTableViewCell
-        
         let repository = repositories[indexPath.row]
         
         cell.authorPic?.downloaded(from: URL(string: (repository.owner?.avatarURL!)!)!)
@@ -55,19 +59,20 @@ class SwiftRepositoryTableViewController: UITableViewController {
         cell.repositoryName!.text = repository.fullName
         cell.repositoryStars!.text = String(repository.stargazersCount!)
         
-        
         return cell
     }
     
     
-    func loadRepos(){
-        let url = "https://api.github.com/search/repositories?q=language:Swift&sort=stars&page=\(page)"
+    func loadRepos(_ onPage: Int){
+        let url = "https://api.github.com/search/repositories?q=language:Swift&sort=stars&page=\(onPage)"
         
         Alamofire.request(url)
             .responseJSON { (response) in
                 if let json = response.result.value as? [String:Any]{
                     if let reposArray = json["items"] as? [[String:Any]] {
-                        self.repositories = [Repository].from(jsonArray: reposArray)!
+                        let repos =  [Repository].from(jsonArray: reposArray)!
+                        self.repositories += repos
+                        self.totalRepositories = json["total_count"] as! Int
                     }
                 }
                 self.tableView.reloadData()
