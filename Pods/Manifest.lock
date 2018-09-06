@@ -1,0 +1,30 @@
+PODS:
+  - Alamofire (4.6.0)
+  - Alamofire-Gloss (3.0.1):
+    - Alamofire-Gloss/Core (= 3.0.1)
+  - Alamofire-Gloss/Core (3.0.1):
+    - Alamofire (~> 4.6.0)
+    - Gloss (~> 2.0.0-beta.2)
+  - Gloss (2.0.1)
+  - SwiftyJSON (4.1.0)
+
+DEPENDENCIES:
+  - Alamofire-Gloss
+  - SwiftyJSON
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Alamofire-Gloss
+    - Gloss
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  Alamofire-Gloss: d7f3e9c254dad95281787244cefb17c91e25881b
+  Gloss: 1e8743f8de1fbe14a97f220ff901cba91ae5f8f8
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+
+PODFILE CHECKSUM: d3c45f97fff62ca6db9fb174121a4b510bb06c13
+
+COCOAPODS: 1.5.3
