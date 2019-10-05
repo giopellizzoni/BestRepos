@@ -33,17 +33,6 @@ class SwiftRepositoriesViewController: UIViewController {
     func loadRepos(_ onPage: Int){
         let url = "https://api.github.com/search/repositories?q=language:Swift&sort=stars&page=\(onPage)"
         
-//        Alamofire.request(url)
-//            .responseJSON { (response) in
-//                if let json = response.result.value as? [String:Any]{
-//                    if let reposArray = json["items"] as? [[String:Any]] {
-//                        let repos =  [Repository].from(jsonArray: reposArray)!
-//                        self.repositories += repos
-//                        self.totalRepositories = json["total_count"] as! Int
-//                    }
-//                }
-//                self.tableView.reloadData()
-//        }
     }
     
 }
