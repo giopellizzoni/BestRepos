@@ -22,26 +22,4 @@ extension URLSession {
         }.resume()
     }
     
-    
-    func downloadReposFrom(_ url: URL, onSuccess: @escaping ([Repository]) -> (), onError: @escaping (Error) -> ()) {
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else  { return }
-            
-            if error != nil {
-                guard let error = error else { return }
-                onError(error)
-            } else {
-                let decoder = JSONDecoder()
-                let result = try? decoder.decode([Repository].self, from: data)
-                guard let repositories = result else { return }
-                onSuccess(repositories)
-            }
-            
-        }
-        task.resume()
-        
-    }
-    
-    
 }

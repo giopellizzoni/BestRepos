@@ -8,11 +8,18 @@
 
 import Foundation
 
+struct RepositoryList: Decodable {
+    let total_count: Int?
+    let items: [Repository]?
+}
+
 struct Repository: Decodable {
     
-    var name, fullName: String?
-    var owner: Owner?
-    var description: String?
-    var stargazersCount, forksCount: Int?
+    let name: String?
+    let full_name: String?
+    let owner: Owner?
+    let description: String?
+    let stargazers_count: Int?
+    let forks_count: Int?
     
 }

@@ -9,17 +9,22 @@
 import Foundation
 
 protocol WebServiceProtocol {
-    func getRepositories(completionHandler: @escaping ([Repository]?, Error?) -> ())
+    func load<T>(resource: Resource<T>, completion: @escaping (T?) -> ())
 }
 
-class WebService: WebServiceProtocol {
-    public let sharedInstance = WebService()
+final class WebService: WebServiceProtocol {
     
-    func getRepositories(completionHandler: @escaping ([Repository]?, Error?) -> ()) {
-        URLSession.shared.downloadReposFrom(URL(string: "")!, onSuccess: { (repos) in
-            completionHandler(repos,nil)
-        }) { (error) in
-            completionHandler(nil, error)
-        }
+    func load<T>(resource: Resource<T>, completion: @escaping (T?) -> ()) {
+        
+        URLSession.shared.dataTask(with: resource.url) { (data, response, error) in
+            if let data = data {
+                DispatchQueue.main.async {
+                    completion(resource.parse(data))
+                }
+            } else {
+                completion(nil)
+            }
+        }.resume()
+        
     }
 }

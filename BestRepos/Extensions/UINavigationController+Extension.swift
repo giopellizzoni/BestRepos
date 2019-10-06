@@ -9,7 +9,12 @@
 import UIKit
 
 extension UINavigationController {
-    func setNavigationBackgroundColor(_ color: UIColor = #colorLiteral(red: 0.1568627451, green: 0.6666666667, blue: 0.7529411765, alpha: 1)) {
+    func setColors(bgColor color: UIColor = #colorLiteral(red: 0.1568627451, green: 0.6666666667, blue: 0.7529411765, alpha: 1), titleColor textColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)) {
         self.navigationBar.barTintColor = color
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
+        
+        self.navigationBar.backgroundColor = color
+        self.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : textColor]
+        
     }
 }
