@@ -7,34 +7,19 @@
 //
 
 import Foundation
-import Gloss
 
-
-struct Repository: JSONDecodable {
-    
-    var name, fullName: String?
-    var owner: Owner?
-    var description: String?
-    var stargazersCount, forksCount: Int?
-    
-    init?(json: JSON) {
-        self.name = "name" <~~ json
-        self.fullName = "full_name" <~~ json
-        self.owner = "owner" <~~ json
-        self.description = "description" <~~ json
-        self.stargazersCount = "stargazers_count" <~~ json
-        self.forksCount = "forks_count" <~~ json
-        
-    }
-
+struct RepositoryList: Decodable {
+    let total_count: Int?
+    let items: [Repository]?
 }
 
-struct Owner: JSONDecodable {
-    init?(json: JSON) {
-        self.avatarURL = "avatar_url" <~~ json
-        self.login = "login" <~~ json
-    }
-    var avatarURL: String?
-    var login: String?
+struct Repository: Decodable {
+    
+    let name: String?
+    let full_name: String?
+    let owner: Owner?
+    let description: String?
+    let stargazers_count: Int?
+    let forks_count: Int?
+    
 }
-
