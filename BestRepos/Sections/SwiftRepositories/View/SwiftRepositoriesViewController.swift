@@ -19,6 +19,7 @@ class SwiftRepositoriesViewController: BaseViewController {
         super.viewDidLoad()
         self.changeStatusBarColor()
         title = "Best Repos"
+        
         viewModel.fetchRepos(onPage: 1) {
             self.setupTableView()
             self.tableView.reloadData()
@@ -43,6 +44,14 @@ class SwiftRepositoriesViewController: BaseViewController {
         let nib = UINib(nibName: "RepositoryCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "RepositoryCell")
         
+        self.loadData()
+        
+        tableView.dataSource = dataSource
+        tableView.delegate = self
+        
+    }
+    
+    func loadData() {
         guard let repos = viewModel?.repositories else { return }
         self.dataSource = TableViewDataSource(cellIdentifier: "RepositoryCell",
                                               items: repos,
@@ -51,12 +60,7 @@ class SwiftRepositoriesViewController: BaseViewController {
                                                 cell.configure(repository: it)
                                                 
         })
-        
-        tableView.dataSource = dataSource
-        tableView.delegate = self
-        
     }
-    
 }
 
 extension SwiftRepositoriesViewController: UITableViewDelegate {
@@ -77,5 +81,12 @@ extension SwiftRepositoriesViewController: UITableViewDelegate {
                 }
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let repo = viewModel.repositories[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.navigateToPR(from: repo)
+        
     }
 }

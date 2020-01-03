@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct User : Decodable {
+struct User: Codable {
+    var avatarUrl: String?
+    var login: String?
     
-    let login, avatarURL: String?
+    enum CodingKeys: String, CodingKey {
+        case avatarUrl = "avatar_url"
+        case login
+    }
 }

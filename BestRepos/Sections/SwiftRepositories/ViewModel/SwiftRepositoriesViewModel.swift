@@ -8,13 +8,17 @@
 
 import Foundation
 
+protocol SwiftDidSelectRepositoryDelegate: class {
+    func didSelectRepository(_ repo: Repository)
+}
 
-protocol SwiftRepositoriesViewModelProtocol {
+protocol SwiftRepositoriesViewModelProtocol: class {
     var repositories: [Repository] { get }
     var totalRepositories: Int? { get }
     var page: Int { get set }
     
     func fetchRepos(onPage page: Int, completion: @escaping () -> ())
+    func navigateToPR(from repo: Repository)
 }
 
 class SwiftRepositoriesViewModel: SwiftRepositoriesViewModelProtocol {
@@ -22,6 +26,8 @@ class SwiftRepositoriesViewModel: SwiftRepositoriesViewModelProtocol {
     var page: Int = 1
     var totalRepositories: Int?
     var repositories: [Repository] = [Repository]()
+    private var prCoordinator: PullRequestsCoordinator?
+    weak var delegate: SwiftDidSelectRepositoryDelegate?
     
     private var service: WebServiceProtocol
     
@@ -40,7 +46,7 @@ class SwiftRepositoriesViewModel: SwiftRepositoriesViewModelProtocol {
         }
         
         self.service.load(resource: resource) { (repos) in
-            self.totalRepositories = repos?.total_count ?? 0
+            self.totalRepositories = repos?.totalCount ?? 0
             guard let items = repos?.items else { return }
             self.repositories += items
             
@@ -49,4 +55,7 @@ class SwiftRepositoriesViewModel: SwiftRepositoriesViewModelProtocol {
         
     }
     
+    func navigateToPR(from repo: Repository) {
+        delegate?.didSelectRepository(repo)
+    }
 }

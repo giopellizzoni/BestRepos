@@ -9,26 +9,18 @@
 import Foundation
 import UIKit
 
+
+
 class AppCoordinator: BaseCoordinator {
-    let window: UIWindow
-    
-    init(window: UIWindow) {
-        self.window = window
-        super.init()
-    }
+    var window = UIWindow(frame: UIScreen.main.bounds)
     
     override func start() {
-        let navigationController = UINavigationController()
-        navigationController.navigationBar.prefersLargeTitles = true
         
+        self.window.rootViewController = self.navigationController
+        self.window.makeKeyAndVisible()
         
-        navigationController.setColors()
-        let flow = Flow(navigationController: navigationController)
-        self.addChild(coordinator: flow)
-        
-        flow.start()
-        
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+        let coordinator = SwiftRepositoriesListCoordinator()
+        coordinator.navigationController = self.navigationController
+        self.start(coordinator: coordinator)
     }
 }

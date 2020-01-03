@@ -20,12 +20,12 @@ class RepositoryCell: UITableViewCell {
     @IBOutlet weak var repositoryFork: UILabel?
     
     func configure(repository: Repository) {
-        guard let avatar = repository.owner?.avatar_url,
-            let name = repository.full_name,
+        guard let avatar = repository.owner?.avatarUrl,
+            let name = repository.fullName,
             let repoName = repository.name,
             let repoDesc = repository.description,
-            let repoStars = repository.stargazers_count,
-            let repoFork = repository.forks_count else { return }
+            let repoStars = repository.stargazersCount,
+            let repoFork = repository.forksCount else { return }
         
         
         self.authorPic?.downloaded(from: avatar)
