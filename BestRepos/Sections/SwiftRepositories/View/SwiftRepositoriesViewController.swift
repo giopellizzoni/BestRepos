@@ -20,6 +20,10 @@ class SwiftRepositoriesViewController: BaseViewController {
         self.changeStatusBarColor()
         title = "Best Repos"
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel.fetchRepos(onPage: 1) {
             self.setupTableView()
             self.tableView.reloadData()
