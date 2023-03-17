@@ -10,16 +10,14 @@ import UIKit
 
 extension URLSession {
     
-    func downloadImageFrom(url address: URL, completionHandler: @escaping (UIImage?) -> () ) {
-        URLSession.shared.dataTask(with: address) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            completionHandler(image)
-        }.resume()
+    func downloadImageFrom(url address: URL) async throws -> UIImage? {
+        
+        let (data, response) = try await URLSession.shared.data(from: address)
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+              let mimeType = response.mimeType, mimeType.hasPrefix("image"),
+              let image = UIImage(data: data) else { return nil}
+        
+        return image
     }
     
 }

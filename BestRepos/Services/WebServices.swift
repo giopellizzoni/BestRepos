@@ -9,22 +9,12 @@
 import Foundation
 
 protocol WebServiceProtocol {
-    func load<T>(resource: Resource<T>, completion: @escaping (T?) -> ())
+    func load(from url: URL) async throws -> Data
 }
 
 final class WebService: WebServiceProtocol {
-    
-    func load<T>(resource: Resource<T>, completion: @escaping (T?) -> ()) {
-        
-        URLSession.shared.dataTask(with: resource.url) { (data, response, error) in
-            if let data = data {
-                DispatchQueue.main.async {
-                    completion(resource.parse(data))
-                }
-            } else {
-                completion(nil)
-            }
-        }.resume()
-        
+    func load(from url: URL) async throws -> Data {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return data
     }
 }

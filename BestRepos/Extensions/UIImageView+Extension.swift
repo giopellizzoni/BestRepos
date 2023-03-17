@@ -6,21 +6,20 @@
 //  Copyright © 2018 Giovanni Pellizzoni. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UIImageView {
-    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) async throws {
         contentMode = mode
-        URLSession.shared.downloadImageFrom(url: url) { (image) in
-            DispatchQueue.main.async {
-             self.image = image
-            }
-        }
+        self.image = try await URLSession.shared.downloadImageFrom(url: url)
     }
     
-    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) async {
         guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode)
+        do {
+            try await downloaded(from: url, contentMode: mode)
+        } catch{
+            print(" image not found")
+        }
     }
 }

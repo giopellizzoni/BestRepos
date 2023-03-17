@@ -27,8 +27,10 @@ class RepositoryCell: UITableViewCell {
             let repoStars = repository.stargazers_count,
             let repoFork = repository.forks_count else { return }
         
+        Task.detached {
+            await self.authorPic?.downloaded(from: avatar)
+        }
         
-        self.authorPic?.downloaded(from: avatar)
         self.authorName?.text = name
         self.repositoryName?.text = repoName
         self.repositoryDescription?.text = repoDesc

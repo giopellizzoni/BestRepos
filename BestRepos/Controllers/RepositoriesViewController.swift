@@ -8,24 +8,25 @@
 
 import UIKit
 
-class SwiftRepositoriesViewController: BaseViewController {
+class RepositoriesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var viewModel: SwiftRepositoriesViewModelProtocol!
+    private var viewModel: SwiftRepositoriesPresenterProtocol!
     private var dataSource: TableViewDataSource<RepositoryCell, Repository>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.changeStatusBarColor()
         title = "Best Repos"
-        viewModel.fetchRepos(onPage: 1) {
-            self.setupTableView()
-            self.tableView.reloadData()
+        changeStatusBarColor()
+        Task.detached {
+            await self.viewModel.fetchRepos(onPage: 1)
         }
+        setupTableView()
+        
     }
     
-    init(with viewModel: SwiftRepositoriesViewModelProtocol) {
+    init(with viewModel: SwiftRepositoriesPresenterProtocol) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
@@ -42,38 +43,35 @@ class SwiftRepositoriesViewController: BaseViewController {
         
         let nib = UINib(nibName: "RepositoryCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "RepositoryCell")
-        
-        guard let repos = viewModel?.repositories else { return }
-        self.dataSource = TableViewDataSource(cellIdentifier: "RepositoryCell",
-                                              items: repos,
-                                              configureCell: { (cell, it) in
-                                                
-                                                cell.configure(repository: it)
-                                                
-        })
-        
         tableView.dataSource = dataSource
         tableView.delegate = self
         
+        self.dataSource = TableViewDataSource(cellIdentifier: "RepositoryCell",
+                                              items: [],
+                                              configureCell: { (cell, it) in
+            
+            cell.configure(repository: it)
+            
+        })
     }
-    
 }
 
-extension SwiftRepositoriesViewController: UITableViewDelegate {
+
+
+extension RepositoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let totalRepos = viewModel.totalRepositories else { return }
-        let repos = viewModel.repositories
+        let reposCount = viewModel.totalRepositories ?? 0
         
-        if indexPath.row == repos.count - 1 {
-            if repos.count < totalRepos {
+        if indexPath.row == reposCount - 1 {
+            if reposCount < totalRepos {
                 viewModel.page += 1
-                viewModel.fetchRepos(onPage: viewModel.page) {
-                    self.setupTableView()
-                    self.tableView.reloadData()
+                Task.detached {
+                    await self.viewModel.fetchRepos(onPage: self.viewModel.page)
                 }
             }
         }
