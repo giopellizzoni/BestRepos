@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		66A57F6729C4B1940002A6CD /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A57F6629C4B1940002A6CD /* ReusableView.swift */; };
 		66A57F6C29C4B4E70002A6CD /* RepositoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A57F6B29C4B4E70002A6CD /* RepositoriesView.swift */; };
+		66A57F6F29C4C68E0002A6CD /* RepoNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A57F6E29C4C68E0002A6CD /* RepoNumbersView.swift */; };
+		66A57F7229C4CA700002A6CD /* UIImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A57F7129C4CA700002A6CD /* UIImageName.swift */; };
 		66F67FE729C4791E00AC3452 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F67FE629C4791E00AC3452 /* Constants.swift */; };
 		66F67FEA29C4820A00AC3452 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F67FE929C4820A00AC3452 /* UIViewController+Extensions.swift */; };
 		AE133BA323442C670040234B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE133BA223442C670040234B /* User.swift */; };
@@ -37,6 +39,8 @@
 /* Begin PBXFileReference section */
 		66A57F6629C4B1940002A6CD /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		66A57F6B29C4B4E70002A6CD /* RepositoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesView.swift; sourceTree = "<group>"; };
+		66A57F6E29C4C68E0002A6CD /* RepoNumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoNumbersView.swift; sourceTree = "<group>"; };
+		66A57F7129C4CA700002A6CD /* UIImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageName.swift; sourceTree = "<group>"; };
 		66F67FE629C4791E00AC3452 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		66F67FE929C4820A00AC3452 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		AE133BA223442C670040234B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -104,6 +108,22 @@
 			path = Screen;
 			sourceTree = "<group>";
 		};
+		66A57F6D29C4C6720002A6CD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				66A57F6E29C4C68E0002A6CD /* RepoNumbersView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		66A57F7029C4CA5A0002A6CD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				66A57F7129C4CA700002A6CD /* UIImageName.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		66F67FE529C4790900AC3452 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +171,7 @@
 		AE45E45B2141684E00E825AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				66A57F7029C4CA5A0002A6CD /* Helpers */,
 				66F67FE529C4790900AC3452 /* Constants */,
 				AE45E4582140E51600E825AC /* Extensions */,
 				AE219CD0234435710019F010 /* Services */,
@@ -159,13 +180,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		AE45E462214174E900E825AC /* Presenters */ = {
+		AE45E462214174E900E825AC /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
 				AE805791234916C300229787 /* RepositoryListViewModel.swift */,
 				AE219CD52346D3380019F010 /* RepositoriesPresenter.swift */,
 			);
-			path = Presenters;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		AE675C11213F8A5100DACC3F = {
@@ -192,8 +213,8 @@
 				AE675C1D213F8A5200DACC3F /* AppDelegate.swift */,
 				AE805797234A391D00229787 /* Coordinator */,
 				AE45E45B2141684E00E825AC /* Model */,
-				AE45E462214174E900E825AC /* Presenters */,
-				AED8582A213FFDF000F5A947 /* Views */,
+				AE45E462214174E900E825AC /* Presenter */,
+				AED8582A213FFDF000F5A947 /* View */,
 			);
 			path = BestRepos;
 			sourceTree = "<group>";
@@ -218,14 +239,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		AED8582A213FFDF000F5A947 /* Views */ = {
+		AED8582A213FFDF000F5A947 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				66A57F6D29C4C6720002A6CD /* Views */,
 				66A57F6829C4B4AF0002A6CD /* Screen */,
 				66A57F6529C4B1840002A6CD /* Protocols */,
 				AEC8DFFC21400FB4002EED88 /* Cells */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +326,7 @@
 				AE45E45E2141686D00E825AC /* PullRequestsTableViewCell.swift in Sources */,
 				AEC8DFFA21400FAD002EED88 /* RepositoryCell.swift in Sources */,
 				AE219CD2234435880019F010 /* WebServices.swift in Sources */,
+				66A57F6F29C4C68E0002A6CD /* RepoNumbersView.swift in Sources */,
 				66F67FEA29C4820A00AC3452 /* UIViewController+Extensions.swift in Sources */,
 				AE219CCF234432DE0019F010 /* UINavigationController+Extension.swift in Sources */,
 				AE219CD62346D3380019F010 /* RepositoriesPresenter.swift in Sources */,
@@ -311,6 +334,7 @@
 				AE45E4642141758B00E825AC /* PullRequest.swift in Sources */,
 				AE805799234A397100229787 /* Coordinator.swift in Sources */,
 				66A57F6C29C4B4E70002A6CD /* RepositoriesView.swift in Sources */,
+				66A57F7229C4CA700002A6CD /* UIImageName.swift in Sources */,
 				AE133BA523442CB00040234B /* Owner.swift in Sources */,
 				AE219CC8234431180019F010 /* RepositoriesViewController.swift in Sources */,
 				AE45E45A2140E54000E825AC /* UIImageView+Extension.swift in Sources */,

@@ -14,45 +14,63 @@ class RepositoryCell: UITableViewCell, ReusableView {
     lazy var authorPic: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     lazy var authorName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
     
     lazy var repositoryName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: 18)
+        label.contentCompressionResistancePriority(for: .vertical)
+        return label
+    }()
+    lazy var repositoryDescription: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 10)
+        label.numberOfLines = 0
         return label
     }()
     
     lazy var repoDataStackView: UIStackView  = {
-        let stackView = UIStackView(arrangedSubviews: [authorName, repositoryName])
+        let stackView = UIStackView(arrangedSubviews: [repositoryName, authorName, repositoryDescription])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 5
+        stackView.distribution = .fillProportionally
         return stackView
     }()
     
-    lazy var repositoryDescription: UILabel = {
-        let label = UILabel()
-        return label
+    lazy var starsView: NumbersView = {
+        let view = NumbersView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    lazy var repositoryStarsLabel: UILabel = {
-        let label = UILabel()
-        return label
+    lazy var forksView: NumbersView = {
+        let view = NumbersView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    lazy var repositoryForkLabel: UILabel = {
-        let label = UILabel()
-        return label
+    lazy var numbersStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            starsView, forksView
+        ])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        return stackView
     }()
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -69,23 +87,35 @@ extension RepositoryCell {
     fileprivate func configureAuthorPicture() {
         addSubview(authorPic)
         NSLayoutConstraint.activate([
-            authorPic.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            authorPic.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             authorPic.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            authorPic.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
+            authorPic.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+            authorPic.widthAnchor.constraint(equalToConstant: 80),
+            authorPic.heightAnchor.constraint(equalToConstant: 80)
+            
         ])
     }
     
-    private func setupViews() {
-        configureAuthorPicture()
-        
+    fileprivate func configureStackview() {
         addSubview(repoDataStackView)
         NSLayoutConstraint.activate([
             repoDataStackView.leadingAnchor.constraint(equalTo: authorPic.trailingAnchor, constant: 8),
             repoDataStackView.topAnchor.constraint(equalTo: authorPic.topAnchor),
             repoDataStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
         ])
-        
-        
+    }
+    
+    private func setupViews() {
+        configureAuthorPicture()
+        configureStackview()
+        addSubview(numbersStackView)
+        NSLayoutConstraint.activate([
+            numbersStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            numbersStackView.topAnchor.constraint(equalTo: self.repoDataStackView.topAnchor),
+            numbersStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            numbersStackView.widthAnchor.constraint(equalToConstant: 100)
+            
+        ])
     }
 }
 
@@ -107,8 +137,8 @@ extension RepositoryCell {
         self.authorName.text = name
         self.repositoryName.text = repoName
         self.repositoryDescription.text = repoDesc
-        self.repositoryStarsLabel.text = String(describing: repoStars)
-        self.repositoryForkLabel.text = String(describing: repoFork)
+        self.forksView.setupViews(imageName: UIImageName.fork, text: "\(repoFork)")
+        self.starsView.setupViews(imageName: UIImageName.stars, text: "\(repoStars)")
         
     }
 }
