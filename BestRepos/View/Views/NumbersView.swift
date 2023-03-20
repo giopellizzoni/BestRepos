@@ -13,6 +13,7 @@ class NumbersView: UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = true
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -21,6 +22,7 @@ class NumbersView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 12)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
 
@@ -28,8 +30,10 @@ class NumbersView: UIView {
         let stackView = UIStackView(arrangedSubviews: [
             imageView, numbersLabel
         ])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.spacing = 5
+        stackView.alignment = .trailing
         return stackView
     }()
     
@@ -48,8 +52,8 @@ class NumbersView: UIView {
 extension NumbersView {
     private func configureViews() {
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 24),
-            imageView.widthAnchor.constraint(equalToConstant: 24),
+            imageView.heightAnchor.constraint(equalToConstant: 16),
+            imageView.widthAnchor.constraint(equalToConstant: 16),
         ])
         
         addSubview(stackView)

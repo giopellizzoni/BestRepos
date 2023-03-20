@@ -21,6 +21,7 @@ class RepositoriesViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        title = repositoriesView.pageTitle
         repositoriesView.delegate = self
         repositoriesView.presenter = presenter
         repositoriesView.setupViews()

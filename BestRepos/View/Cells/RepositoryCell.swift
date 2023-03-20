@@ -29,7 +29,6 @@ class RepositoryCell: UITableViewCell, ReusableView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18)
-        label.contentCompressionResistancePriority(for: .vertical)
         return label
     }()
     lazy var repositoryDescription: UILabel = {
@@ -100,20 +99,21 @@ extension RepositoryCell {
         addSubview(repoDataStackView)
         NSLayoutConstraint.activate([
             repoDataStackView.leadingAnchor.constraint(equalTo: authorPic.trailingAnchor, constant: 8),
-            repoDataStackView.topAnchor.constraint(equalTo: authorPic.topAnchor),
-            repoDataStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
+            repoDataStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            repoDataStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
         ])
     }
     
     private func setupViews() {
         configureAuthorPicture()
         configureStackview()
+        
         addSubview(numbersStackView)
         NSLayoutConstraint.activate([
             numbersStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            numbersStackView.topAnchor.constraint(equalTo: self.repoDataStackView.topAnchor),
-            numbersStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            numbersStackView.widthAnchor.constraint(equalToConstant: 100)
+            numbersStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            numbersStackView.leadingAnchor.constraint(equalTo: self.repoDataStackView.trailingAnchor, constant: 10),
+            numbersStackView.widthAnchor.constraint(equalToConstant: 80)
             
         ])
     }

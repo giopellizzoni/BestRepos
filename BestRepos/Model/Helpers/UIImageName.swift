@@ -10,5 +10,5 @@ import Foundation
 
 struct UIImageName {
     static var fork = "fork"
-    static var stars = "stars"
+    static var stars = "star"
 }

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		66A57F6729C4B1940002A6CD /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A57F6629C4B1940002A6CD /* ReusableView.swift */; };
 		66A57F6C29C4B4E70002A6CD /* RepositoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A57F6B29C4B4E70002A6CD /* RepositoriesView.swift */; };
-		66A57F6F29C4C68E0002A6CD /* RepoNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A57F6E29C4C68E0002A6CD /* RepoNumbersView.swift */; };
+		66A57F6F29C4C68E0002A6CD /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A57F6E29C4C68E0002A6CD /* NumbersView.swift */; };
 		66A57F7229C4CA700002A6CD /* UIImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A57F7129C4CA700002A6CD /* UIImageName.swift */; };
 		66F67FE729C4791E00AC3452 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F67FE629C4791E00AC3452 /* Constants.swift */; };
 		66F67FEA29C4820A00AC3452 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F67FE929C4820A00AC3452 /* UIViewController+Extensions.swift */; };
@@ -39,7 +39,7 @@
 /* Begin PBXFileReference section */
 		66A57F6629C4B1940002A6CD /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		66A57F6B29C4B4E70002A6CD /* RepositoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesView.swift; sourceTree = "<group>"; };
-		66A57F6E29C4C68E0002A6CD /* RepoNumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoNumbersView.swift; sourceTree = "<group>"; };
+		66A57F6E29C4C68E0002A6CD /* NumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
 		66A57F7129C4CA700002A6CD /* UIImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageName.swift; sourceTree = "<group>"; };
 		66F67FE629C4791E00AC3452 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		66F67FE929C4820A00AC3452 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		66A57F6D29C4C6720002A6CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				66A57F6E29C4C68E0002A6CD /* RepoNumbersView.swift */,
+				66A57F6E29C4C68E0002A6CD /* NumbersView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,7 +326,7 @@
 				AE45E45E2141686D00E825AC /* PullRequestsTableViewCell.swift in Sources */,
 				AEC8DFFA21400FAD002EED88 /* RepositoryCell.swift in Sources */,
 				AE219CD2234435880019F010 /* WebServices.swift in Sources */,
-				66A57F6F29C4C68E0002A6CD /* RepoNumbersView.swift in Sources */,
+				66A57F6F29C4C68E0002A6CD /* NumbersView.swift in Sources */,
 				66F67FEA29C4820A00AC3452 /* UIViewController+Extensions.swift in Sources */,
 				AE219CCF234432DE0019F010 /* UINavigationController+Extension.swift in Sources */,
 				AE219CD62346D3380019F010 /* RepositoriesPresenter.swift in Sources */,
