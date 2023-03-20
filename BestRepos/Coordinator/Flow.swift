@@ -17,8 +17,9 @@ class Flow: BaseCoordinator {
     
     override func start() {
         let service = WebService()
-        let viewModel = SwiftRepositoriesViewModel(with: service)
-        let viewController = SwiftRepositoriesViewController(with: viewModel)
+        let view = RepositoriesView()
+        let presenter = RepositoriesPresenter(repositoriesView: view, service: service)
+        let viewController = RepositoriesViewController(view: view, presenter: presenter)
         
         navigationController?.pushViewController(viewController, animated: true)
     }
