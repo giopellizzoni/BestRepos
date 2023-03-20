@@ -9,6 +9,5 @@
 import Foundation
 
 struct User : Decodable {
-    
     let login, avatarURL: String?
 }

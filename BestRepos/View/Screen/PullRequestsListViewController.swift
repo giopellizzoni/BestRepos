@@ -27,14 +27,6 @@ class PullRequestsListViewController: UIViewController {
     
     func loadPullRequests(){
         let url = "https://api.github.com/repos/\(owner!)/\(repo!)/pulls"
-        
-//        Alamofire.request(url).responseJSON { (response) in
-//            if let json = response.result.value as? [[String:Any]]{
-//                let repos =  [PullRequest].from(jsonArray: json)!
-//                self.pullResquests += repos
-//            }
-//            self.tableView.reloadData()
-//        }
     }
     
     
