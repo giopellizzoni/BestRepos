@@ -10,12 +10,12 @@ import UIKit
 
 class RepositoriesViewController: UIViewController {
     
-    private var repositoriesView: RepositoriesView
+    private var repositoriesView: RepositoriesView = RepositoriesView()
     private var presenter: RepositoriesPresenterProtocol
     
-    init(view: RepositoriesView, presenter: RepositoriesPresenterProtocol) {
-        self.repositoriesView = view
+    init(presenter: RepositoriesPresenterProtocol) {
         self.presenter = presenter
+        self.presenter.repositoriesView = repositoriesView
         super.init(nibName: nil, bundle: nil)
     }
     

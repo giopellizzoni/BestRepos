@@ -16,6 +16,7 @@ protocol RepositoriesPresenterProtocol: AnyObject {
     func increasePageNumber()
     func numberOfTotalRepos() -> Int
     func numberOfCurrentRepos() -> Int
+    var repositoriesView: RepositoriesViewDelegate? { get set }
 }
 
 class RepositoriesPresenter {
@@ -23,12 +24,11 @@ class RepositoriesPresenter {
     private var repositories: [Repository] = []
     private var page: Int = 0
     private var totalRepositories: Int = 0
-    
-    private var repositoriesView: RepositoriesViewDelegate?
+    var repositoriesView: RepositoriesViewDelegate?
     private var service: WebServiceProtocol
     
-    init(repositoriesView: RepositoriesViewDelegate? = nil, service: WebServiceProtocol) {
-        self.repositoriesView = repositoriesView
+    init(service: WebServiceProtocol) {
+
         self.service = service
     }
 }

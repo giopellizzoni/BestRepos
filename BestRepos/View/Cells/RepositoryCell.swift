@@ -100,7 +100,7 @@ extension RepositoryCell {
         NSLayoutConstraint.activate([
             repoDataStackView.leadingAnchor.constraint(equalTo: authorPic.trailingAnchor, constant: 8),
             repoDataStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            repoDataStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
+            repoDataStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -25)
         ])
     }
     
